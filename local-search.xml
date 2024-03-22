@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>La prière</title>
+    <link href="/2024/03/22/La%20priere/"/>
+    <url>/2024/03/22/La%20priere/</url>
+    
+    <content type="html"><![CDATA[<p>本站建立的初衷是自己想写一些乱七八糟的东西，包括音乐或者自己专业擅长的东西，<br>但自己毕竟才接触搭建网站，好多东西还需要练习熟悉，本篇内容就以自己喜欢的同人<br>音乐组合之一，La prière，并根据网络上已有的内容进行整理，顺便练习下自己排版能力。<br>才不是想上班摸鱼呢，哼╭(╯^╰)╮</p><span  style="color:#d3381c; ">     <p style="text-align:center">注意：本篇文章包括不限于：排版错乱，链接无效，     图片视频走丢了，中英日文错用，语句不通，页面卡顿，作者妄想发电等</p></span><p>何为La prière？<br>简单来说是一个三人组合，分别是：</p><img src="/2024/03/22/La%20priere/zao.png" class=""><img src="/2024/03/22/La%20priere/lanyue.png" class=""><img src="/2024/03/22/La%20priere/nayuta.png" class=""><p>依次是<br><span  style="color:#f7c114; "> 棗いつき </span>，La prièreのパッション (passion&#x2F;热情) 担当；<br><span  style="color:#0094c8; "> 藍月なくる </span>，La prièreのクール（cool&#x2F;冷静？）担当<br>以及<span  style="color:#e95295; "> nayuta </span>，La prièreのキュート（cute&#x2F;活泼）担当。  </p><p>正如上面介绍的那样，三人的性格定位不同，对歌曲的歌唱方式也不同，下面是我个人感觉，三人比较有代表性的作品</p><div class="video-container">    <!-- 下面这个iframe即从youtube网站上获取的iframe代码 -->    <iframe width="560" height="315" src="https://www.youtube.com/embed/mPQRXIP2pns?si=i_FeoVBS5-DSrQhd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p style="text-align:center"><span  style="color:#f7c114; "> 棗いつき </span></p><div class="video-container">    <iframe width="560" height="315" src="https://www.youtube.com/embed/-FDaPWkveJk?si=1TNdzDo7Pl1roANh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p style="text-align:center"><span  style="color:#0094c8; "> 藍月なくる </span></p><div class="video-container">    <iframe width="560" height="315" src="https://www.youtube.com/embed/IHSKq8SlZQw?si=PiXisM6NTLIoSq_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p style="text-align:center"><span  style="color:#e95295; "> nayuta </span></p><details><summary>发电内容</summary><p>三人对我的感觉就像是，棗是工作中的后辈，一个天天死缠烂打的假小子，晚上一起去喝酒喝的晕乎乎回来靠在我身上的那种；<br>藍月是我初恋（正直脸.jpg），是我初恋，现在还是我初恋，一直都是我初恋，平时那种稍微无可奈何的笑声以及说出的话语都能让我满心雀跃；<br>糖就像是邻家大姐姐，或者就是我姐姐，天天给我膝枕掏耳朵摸我头的那种。</p></details>]]></content>
+    
+    
+    <categories>
+      
+      <category>音乐</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>音乐</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>测试文章</title>
     <link href="/2024/03/22/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2024/03/22/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
@@ -33,7 +58,7 @@
     <link href="/2024/03/22/hello-world/"/>
     <url>/2024/03/22/hello-world/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
     
     

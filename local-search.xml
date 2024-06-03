@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>FCM推送</title>
+    <link href="/2024/06/03/FCM%E6%8E%A8%E9%80%81/"/>
+    <url>/2024/06/03/FCM%E6%8E%A8%E9%80%81/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-success">            <p>浅浅记录下自己摸索fcm的过程，主要是介绍与应用以及自己摸索的过程，不涉及代码等层面，毕竟不是这个专业，只会照抄x，别的什么都不会……</p>          </div><h2 id="摸索的起因"><a href="#摸索的起因" class="headerlink" title="摸索的起因"></a>摸索的起因</h2><p>真正开始着手摸索是上周末，但仔细想想，好像在上个月就意识到这个问题</p><p>当时是和莹烛在上海参加电则，他之前换了果机，闲聊时发现他twitter通知很及时</p><p>而自己的国产机，只有打开twitter刷新时才能在APP内刷新出新通知，而且通知栏通知几乎是没有提示通知的</p><p>当时也就意识这个问题，想着应该是国产和果机之间的差距罢了</p><p>但是上周末，无意间发现自己平板的twitter通知倒是很及时，也有通知</p><p>我想，这总不可能是国产的锅了吧，难道还是系统的锅？</p><p>平板是小米6pro，系统是MIUI 14.x iPad(记不清了)</p><p>板子没升级澎湃OS，也庆幸没升级</p><p>在b站看到好多因为升级澎湃os后，打音游体验极差的反馈</p><p>手机是redmi K60U，系统是hyperOS 1.0.9.0</p><p>手机之前也是MIUI系统的，不过之前为了一个ba主题，升级了澎湃OS，强解了设备锁，刷了root</p><p>不排除是MIUI和澎湃OS系统差异的原因</p><p>但让我重新把手机刷回MIUI系统，又需要冒极大的风险，搞不好就成砖了(物理)</p><p>记得同事手机是MIUI的，摸鱼时顺便和同事测试了下，测试完发现他推特也是没通知</p><p>后续问他系统版本才发现</p><p>tmd</p><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/3.jpg" class=""></div><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/4.jpg" class=""></div></div></div><h2 id="探索过程"><a href="#探索过程" class="headerlink" title="探索过程"></a>探索过程</h2><p>在谷歌搜索以及酷安搜索过程中，搜索到最多的，是使用FCM对微信消息的推送改善</p><p>但也提到过FCM可应用到所有有推送通知的APP上</p><p>于是重点对fcm进行了解</p><h3 id="FCM"><a href="#FCM" class="headerlink" title="FCM"></a>FCM</h3><p>什么是FCM？</p><p>FCM的全称是Firebase Cloud Messaging</p><p>fcm是在Android中由google维护的一条介于google服务器与gms应用之间用于推送通知的长链接</p><p>一般的工作流程为应用服务器将消息发送到google服务器，google服务器将消息推送给gms应用，gms应用通过广播传递给应用</p><p>应用通过接收到的fcm消息决定是否发送通知和通知内容</p><p>我的理解是，没fcm之前，消息是直接从A→B</p><p>有fcm后，消息是从A→FCM→B</p><p>相当于多了一个收发站，不知道这么理解对不对(</p><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/1.jpg" class=""></div><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/2.jpg" class=""></div></div></div><p>具体如何实现以及功能，请点击下方跳转链接自行了解</p><p><a class="btn" href="https://firebase.google.com/docs/cloud-messaging?hl=zh-cn" title="FCM用户手册">FCM用户手册 点我跳转</a></p><h3 id="FCMFIX"><a href="#FCMFIX" class="headerlink" title="FCMFIX"></a>FCMFIX</h3><p>明知山有虎，不去明知山.jpg</p><p>还好有前人铺路，这波是直接站在巨人的肩膀上</p><p>fcm在运行时也是有问题的，比如：</p><p>当gms通过fcm广播通知应用时，如果应用处于非运行状态，就会出现Failed to broadcast to stopped app</p><p>fcmfix主要就是解决这个问题（抄自下方连接）</p><p><a class="btn" href="https://github.com/kooritea/fcmfix" title="fcmfix github">[xposed]让fcm唤醒已完全停止的应用 点我跳转</a></p><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>使用fcmfix后，通知推送很及时，一度让我以为就此完结</p><p>但是没过几分钟就遇到了问题</p><p>就是会断连</p><p>搞的我一头雾水，明明我网络没发生变化啊……</p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>解决办法也是在高强度搜索时发现的</p><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/5.jpg" class=""><p>要额外安装这三个模块</p><p>作者的博客地址如下，具体内容自行跳转查看</p><p><a class="btn" href="https://blog.minamigo.moe/archives/1022" title="MinaMichita">MinaMichita博客 点我跳转</a></p><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/6.jpg" class=""><p>从结果上看是好的，推送也很及时，好像没出现断连的现象了，就是可能耗电有点快</p><p>而且通过搜索发现，fcmfix和MIUIgms这两个模块运行的原理还不太一样</p><p>fcmfix好像是可以在有通知推送时将应用唤醒</p><p>但miuigms好像是强制使应用在后台保持运行，耗电比前者更多</p><p>后续再摸索摸索吧，先这样吧，麻了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日常</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>osu</title>
     <link href="/2024/05/31/OSU/"/>
     <url>/2024/05/31/OSU/</url>

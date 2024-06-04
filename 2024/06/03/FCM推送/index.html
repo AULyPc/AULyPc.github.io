@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="AULyPc">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="浅浅记录下自己摸索fcm的过程，主要是介绍与应用以及自己摸索的过程，不涉及代码等层面，毕竟不是这个专业，只会照抄x，别的什么都不会……             摸索的起因真正开始着手摸索是上周末，但仔细想想，好像在上个月就意识到这个问题 当时是和莹烛在上海参加电则，他之前换了果机，闲聊时发现他twitter通知很及时 而自己的国产机，只有打开twitter刷新时才能在AP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FCM推送">
+<meta property="og:url" content="https://aulypc.github.io/2024/06/03/FCM%E6%8E%A8%E9%80%81/index.html">
+<meta property="og:site_name" content="(´・ω・&#96;)">
+<meta property="og:description" content="浅浅记录下自己摸索fcm的过程，主要是介绍与应用以及自己摸索的过程，不涉及代码等层面，毕竟不是这个专业，只会照抄x，别的什么都不会……             摸索的起因真正开始着手摸索是上周末，但仔细想想，好像在上个月就意识到这个问题 当时是和莹烛在上海参加电则，他之前换了果机，闲聊时发现他twitter通知很及时 而自己的国产机，只有打开twitter刷新时才能在AP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aulypc.github.io/img/FCM%E6%8E%A8%E9%80%81/1.jpg">
+<meta property="article:published_time" content="2024-06-03T00:48:43.000Z">
+<meta property="article:modified_time" content="2024-06-04T03:44:12.371Z">
+<meta property="article:author" content="AULyPc">
+<meta property="article:tag" content="日常">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aulypc.github.io/img/FCM%E6%8E%A8%E9%80%81/1.jpg">
+  
+  
+  
+  <title>FCM推送 - (´・ω・`)</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/mac.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css">
+<link rel="stylesheet" href="/css/youtube.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"aulypc.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"H6x4cXI2wrGr97ISFTHxLNoI-gzGzoHsz","app_key":"P4ENl7XH1bASThqj0yOni4Ry","server_url":"https://h6x4cxi2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AULyPcの博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/FCM%E6%8E%A8%E9%80%81/1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="FCM推送"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-03 08:48" pubdate>
+          2024年6月3日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+    
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">FCM推送</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <div class="note note-success">
+            <p>浅浅记录下自己摸索fcm的过程，主要是介绍与应用以及自己摸索的过程，不涉及代码等层面，毕竟不是这个专业，只会照抄x，别的什么都不会……</p>
+          </div>
+
+<h2 id="摸索的起因"><a href="#摸索的起因" class="headerlink" title="摸索的起因"></a>摸索的起因</h2><p>真正开始着手摸索是上周末，但仔细想想，好像在上个月就意识到这个问题</p>
+<p>当时是和莹烛在上海参加电则，他之前换了果机，闲聊时发现他twitter通知很及时</p>
+<p>而自己的国产机，只有打开twitter刷新时才能在APP内刷新出新通知，而且通知栏通知几乎是没有提示通知的</p>
+<p>当时也就意识这个问题，想着应该是国产和果机之间的差距罢了</p>
+<p>但是上周末，无意间发现自己平板的twitter通知倒是很及时，也有通知</p>
+<p>我想，这总不可能是国产的锅了吧，难道还是系统的锅？</p>
+<p>平板是小米6pro，系统是MIUI 14.x iPad(记不清了)</p>
+<p>板子没升级澎湃OS，也庆幸没升级</p>
+<p>在b站看到好多因为升级澎湃os后，打音游体验极差的反馈</p>
+<p>手机是redmi K60U，系统是hyperOS 1.0.9.0</p>
+<p>手机之前也是MIUI系统的，不过之前为了一个ba主题，升级了澎湃OS，强解了设备锁，刷了root</p>
+<p>不排除是MIUI和澎湃OS系统差异的原因</p>
+<p>但让我重新把手机刷回MIUI系统，又需要冒极大的风险，搞不好就成砖了(物理)</p>
+<p>记得同事手机是MIUI的，摸鱼时顺便和同事测试了下，测试完发现他推特也是没通知</p>
+<p>后续问他系统版本才发现</p>
+<p>tmd</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/3.jpg" srcset="/img/loading.gif" lazyload class=""></div><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/4.jpg" srcset="/img/loading.gif" lazyload class=""></div></div></div>
+
+<h2 id="探索过程"><a href="#探索过程" class="headerlink" title="探索过程"></a>探索过程</h2><p>在谷歌搜索以及酷安搜索过程中，搜索到最多的，是使用FCM对微信消息的推送改善</p>
+<p>但也提到过FCM可应用到所有有推送通知的APP上</p>
+<p>于是重点对fcm进行了解</p>
+<h3 id="FCM"><a href="#FCM" class="headerlink" title="FCM"></a>FCM</h3><p>什么是FCM？</p>
+<p>FCM的全称是Firebase Cloud Messaging</p>
+<p>fcm是在Android中由google维护的一条介于google服务器与gms应用之间用于推送通知的长链接</p>
+<p>一般的工作流程为应用服务器将消息发送到google服务器，google服务器将消息推送给gms应用，gms应用通过广播传递给应用</p>
+<p>应用通过接收到的fcm消息决定是否发送通知和通知内容</p>
+<p>我的理解是，没fcm之前，消息是直接从A→B</p>
+<p>有fcm后，消息是从A→FCM→B</p>
+<p>相当于多了一个收发站，不知道这么理解对不对(</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/1.jpg" srcset="/img/loading.gif" lazyload class=""></div><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/2.jpg" srcset="/img/loading.gif" lazyload class=""></div></div></div>
+
+<p>具体如何实现以及功能，请点击下方跳转链接自行了解</p>
+<p><a class="btn" target="_blank" rel="noopener" href="https://firebase.google.com/docs/cloud-messaging?hl=zh-cn" title="FCM用户手册">FCM用户手册 点我跳转</a></p>
+<h3 id="FCMFIX"><a href="#FCMFIX" class="headerlink" title="FCMFIX"></a>FCMFIX</h3><p>明知山有虎，不去明知山.jpg</p>
+<p>还好有前人铺路，这波是直接站在巨人的肩膀上</p>
+<p>fcm在运行时也是有问题的，比如：</p>
+<p>当gms通过fcm广播通知应用时，如果应用处于非运行状态，就会出现Failed to broadcast to stopped app</p>
+<p>fcmfix主要就是解决这个问题（抄自下方连接）</p>
+<p><a class="btn" target="_blank" rel="noopener" href="https://github.com/kooritea/fcmfix" title="fcmfix github">[xposed]让fcm唤醒已完全停止的应用 点我跳转</a></p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>使用fcmfix后，通知推送很及时，一度让我以为就此完结</p>
+<p>但是没过几分钟就遇到了问题</p>
+<p>就是会断连</p>
+<p>搞的我一头雾水，明明我网络没发生变化啊……</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>解决办法也是在高强度搜索时发现的</p>
+<img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/5.jpg" srcset="/img/loading.gif" lazyload class="">
+
+<p>要额外安装这三个模块</p>
+<p>作者的博客地址如下，具体内容自行跳转查看</p>
+<p><a class="btn" target="_blank" rel="noopener" href="https://blog.minamigo.moe/archives/1022" title="MinaMichita">MinaMichita博客 点我跳转</a></p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/6.jpg" srcset="/img/loading.gif" lazyload class="">
+
+<p>从结果上看是好的，推送也很及时，好像没出现断连的现象了，就是可能耗电有点快</p>
+<p>而且通过搜索发现，fcmfix和MIUIgms这两个模块运行的原理还不太一样</p>
+<p>fcmfix好像是可以在有通知推送时将应用唤醒</p>
+<p>但miuigms好像是强制使应用在后台保持运行，耗电比前者更多</p>
+<p>后续再摸索摸索吧，先这样吧，麻了</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>昨天晚上下班回去就又开始摸索了</p>
+<p>在某一个论坛上找到个帖子</p>
+<p><a class="btn" target="_blank" rel="noopener" href="https://hk.v2ex.com/t/1024853" title="分享一种解决安卓手机收不到谷歌通知的问题的一种方法">点我跳转</a></p>
+<img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/7.jpg" srcset="/img/loading.gif" lazyload class="">
+
+<p>clash for Android 设置hosts时又提示要什么键和值</p>
+<p>我什么都不会啊！？又花时间找了yml配置的文档看了下</p>
+<p>clash for Android规则配置又给我整的头昏脑涨</p>
+<p>中间成功了一次，如下面的两个gif</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/1.gif" srcset="/img/loading.gif" lazyload class=""></div><div class="group-image-wrap"><img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/2.gif" srcset="/img/loading.gif" lazyload class=""></div></div></div>
+
+<p>手机端是这几天折腾的产物，平板是原生的，什么模块都没安装，也没root</p>
+<p>我就奇了怪，为什么手机要折腾这么久才能收到消息，</p>
+<p>但是平板什么都不弄，反而可以接受到消息</p>
+<p>麻了~</p>
+<p>但是切换网络，比如断开WiFi或者连接WiFi都会再次导致fcm断连</p>
+<p>而且断连后无法重新连接</p>
+<p>折腾到凌晨2点多，因为第二天要出差，就怀着遗憾入睡</p>
+<p>第二天下午要出差，上午在公司摸鱼又搞了下</p>
+<p>按照上面那个帖子的另外一种做法试了下</p>
+<img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/8.jpg" srcset="/img/loading.gif" lazyload class="">
+
+<p>但是手机clash for Android不能直接导入文件和修改文件</p>
+<p>想了好久想到可以先走电脑端clash改完配置文件，生成url后导入clash for Android</p>
+<p>这次的状况是 开clash代理、允许应用绕过clash、移动数据</p>
+<p>这次连接时间近两个小时</p>
+<img src="/2024/06/03/FCM%E6%8E%A8%E9%80%81/9.jpg" srcset="/img/loading.gif" lazyload class="">
+
+<p>麻了</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8/" class="category-chain-item">日常</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%97%A5%E5%B8%B8/" class="print-no-link">#日常</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>FCM推送</div>
+      <div>https://aulypc.github.io/2024/06/03/FCM推送/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>AULyPc</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/31/OSU/" title="osu">
+                        <span class="hidden-mobile">osu</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"H6x4cXI2wrGr97ISFTHxLNoI-gzGzoHsz","appKey":"P4ENl7XH1bASThqj0yOni4Ry","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> “这片大地......” 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+  <div id="aplayer"></div>
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+  <script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script>
+  <script defer src="/js/aplayer.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":350},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
+</html>

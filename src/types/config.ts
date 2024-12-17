@@ -13,16 +13,12 @@ export type SiteConfig = {
   banner: {
     enable: boolean
     src: string
-    position?: 'top' | 'center' | 'bottom'
+    position?: string
     credit: {
       enable: boolean
       text: string
       url?: string
     }
-  }
-  toc: {
-    enable: boolean
-    depth: 1 | 2 | 3
   }
 
   favicon: Favicon[]
@@ -38,6 +34,7 @@ export enum LinkPreset {
   Home = 0,
   Archive = 1,
   About = 2,
+  Friends = 3,
 }
 
 export type NavBarLink = {
